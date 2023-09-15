@@ -36,18 +36,30 @@ public class Main {
 		
 		int rejectedIndex = 0;
 		int promotedIndex = 0;
+		Studente bestStudent = new Studente(0, 0, 0);
+		Studente worstStudent = new Studente(0, 0, 5);
 		
 		for (int i = 0; i < students.length; i++) {
 			if(students[i].isRejected()) {
+				if (students[i].avgVote < worstStudent.avgVote) {
+					worstStudent = students[i];
+				}
 				rejectedStudentsArray[rejectedIndex] = students[i];
 				rejectedIndex ++;
 				
 			} else {
+				if(students[i].avgVote > bestStudent.avgVote) {
+					bestStudent = students[i];
+				}
 				promotedStudentsArray[promotedIndex] = students[i];
 				promotedIndex ++;
 				
 			}
 		}
+		
+		
+		
+		
 		
 		System.out.println("There are: " + rejectedStudents + " rejected students");
 		System.out.println("Promoted students: ");
@@ -58,5 +70,7 @@ public class Main {
 		for (int i = 0; i < promotedStudentsArray.length; i++) {
 			System.out.println(rejectedStudentsArray[i].id);
 		}
+		System.out.println("The best promoted student is: " + bestStudent.id);
+		System.out.println("The worst rejected student is: " + worstStudent.id);
 	}
 }
